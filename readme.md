@@ -60,7 +60,7 @@ Once you are ready to sync flags to CTFd, just run the following command.
 
 **NOTE**: The script will remove existing flags if the name doesn't match!
 
-     python challenges ../ctf_challenge.md
+     python src/ctfd_challenge_uploader ../ctf_challenge.md
 
 
 ## Use as dependency

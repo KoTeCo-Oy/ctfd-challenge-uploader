@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 import os
-from .ctfd_client import CTFdClient
+from ctfd_client import CTFdClient
 
 
 class Challenges:
