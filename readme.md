@@ -1,5 +1,7 @@
 # CTFd challenge uploader
 
+Tool to convert specifically formatted markdown file to flag-data that can be uploaded to CTFd
+
 ## Setup
 
 Clone the repo 
@@ -59,6 +61,16 @@ Once you are ready to sync flags to CTFd, just run the following command.
 **NOTE**: The script will remove existing flags if the name doesn't match!
 
      python challenges ../ctf_challenge.md
+
+
+## Use as dependency
+
+If you want to use the parsing part, you can import `Challenges` 
+
+    from ctfd_challenge_uploader.challenges import Challenges
+
+    challenges = Challenges("path/to/file")
+    print(challenges.get_challenges())
 
 ## TODO
 

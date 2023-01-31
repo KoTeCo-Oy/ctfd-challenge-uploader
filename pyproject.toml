@@ -1,0 +1,26 @@
+[project]
+name = "ctfd_challenge_uploader"
+version = "0.1.0"
+authors = [
+  { name="Joni Hasanen", email="joni@koteco.fi" },
+]
+description = "Tool to convert specifically formatted markdown file to flag-data that can be uploaded to CTFd"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "python-dotenv==0.21",
+    "requests==2.28",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/KoTeCo-Oy/ctfd-challenge-uploader"
+"Bug Tracker" = "https://github.com/KoTeCo-Oy/ctfd-challenge-uploader/issues"
+
+[build-system]
+requires = ["hatchling", ]
+build-backend = "hatchling.build"

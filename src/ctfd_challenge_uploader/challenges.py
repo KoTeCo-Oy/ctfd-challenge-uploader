@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 import os
-from ctfd_client import CTFdClient
+from .ctfd_client import CTFdClient
 
 
 class Challenges:
@@ -16,13 +16,18 @@ class Challenges:
         self.__challenge_names_arr = None
         self.__existing_challenges_arr = None
 
-    def execute(self):
-        self.__load_config()
+    def sync(self):
+        self.__load_ctfd_config()
         self.__parse_file()
         self.__remove_missing_challenges()
         self.__create_new_challenges()
 
-    def __load_config(self):
+    def get_challenges(self):
+        self.__parse_file()
+
+        return self.challenges
+
+    def __load_ctfd_config(self):
         load_dotenv()
         load_dotenv(".env.local")
         self.ctfd_client = CTFdClient(
