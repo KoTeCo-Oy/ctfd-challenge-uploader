@@ -74,6 +74,7 @@ If you want to use the parsing part, you can import `Challenges`
 
 ## TODO
 
+- [ ] Publish package in PyPi.org
 - [ ] Some specs would be nice
 - [ ] Publish as package to avoid git cloning
 - [ ] Set points win the md (now uses 1 as default)
