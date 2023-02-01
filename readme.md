@@ -12,7 +12,7 @@ Install packages
 
     pip install -r requirements.txt
 
-Create file `.env.local` and add following two variables
+Create file `src/.env.local` and add following two variables
 
     CTFD_ACCESS_TOKEN=TOKEN
     CTFD_URL=https://your.ctfd.address
@@ -60,7 +60,8 @@ Once you are ready to sync flags to CTFd, just run the following command.
 
 **NOTE**: The script will remove existing flags if the name doesn't match!
 
-     python src/ctfd_challenge_uploader ../ctf_challenge.md
+    cd src
+    python -m ctfd_challenge_uploader ../path/to/challenges.md
 
 
 ## Use as dependency

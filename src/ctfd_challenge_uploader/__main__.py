@@ -1,6 +1,5 @@
+from ctfd_challenge_uploader.challenges import Challenges
 import argparse
-import os
-from challenges import Challenges
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Send challenges to CTFd')
