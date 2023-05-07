@@ -8,9 +8,9 @@ class CTFdClient():
         self.token = token
 
     def get_challenges(self):
-        return self.__get("challenges")
+        return self.__get("challenges", {"view": "admin"})
 
-    def create_challenge(self, name, value=1, type="standard", description=None, category=None):
+    def create_challenge(self, name, value=1, type="standard", description=None, category=None, flag=None):
         payload = {
             "name": name,
             "type": type,
@@ -49,9 +49,18 @@ class CTFdClient():
         }
         return self.__post("flags", payload)
 
-    def __get(self, path):
+    def set_prerequisites(self, challenge_id, required_challenges_ids):
+        payload = {
+            "requirements": {
+                "prerequisites": required_challenges_ids
+            }
+        }
+        return self.__patch("challenges/{}".format(challenge_id), payload)
+
+    def __get(self, path, params={}):
         return requests.get(
             "{}{}".format(self.url, path),
+            params=params,
             headers=self.__headers()
         )
 

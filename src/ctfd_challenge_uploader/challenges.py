@@ -9,6 +9,7 @@ class Challenges:
     DESCRIPTION_PREFIX = "Description:"
     CATEGORY_PREFIX = "Category:"
     FLAG_PREFIX = "Flag:"
+    REQUIREMENT_PREFIX = "Requirement:"
 
     def __init__(self, challenges_file):
         self.challences_file = challenges_file
@@ -21,11 +22,7 @@ class Challenges:
         self.__parse_file()
         self.__remove_missing_challenges()
         self.__create_new_challenges()
-
-    def get_challenges(self):
-        self.__parse_file()
-
-        return self.challenges
+        self.__set_requirements()
 
     def __load_ctfd_config(self):
         load_dotenv()
@@ -61,6 +58,12 @@ class Challenges:
                 if self.CATEGORY_PREFIX in line:
                     current_challenge["category"] = line.split(
                         self.CATEGORY_PREFIX)[1].strip()
+
+                if self.REQUIREMENT_PREFIX in line:
+                    requirements = line.split(
+                        self.REQUIREMENT_PREFIX)[1].strip().split(",")
+                    current_challenge["requirements"] = [
+                        r.strip() for r in requirements]
 
         self.challenges.append(current_challenge)
 
@@ -108,8 +111,18 @@ class Challenges:
                         challenge_data["id"], challenge["flag"])
 
     def __existing_challenge(self, challenge_name):
-        for ch in self.__existing_challenges_arr:
+        for ch in self.__existing_challenges():
             if challenge_name == ch["name"]:
                 return ch
 
         return None
+
+    def __set_requirements(self):
+        for challenge in self.challenges:
+            if "requirements" in challenge:
+                existing_challenge = self.__existing_challenge(
+                    challenge["name"])
+                required_challenge_ids = [self.__existing_challenge(
+                    rc_name)["id"] for rc_name in challenge["requirements"]]
+                self.ctfd_client.set_prerequisites(
+                    existing_challenge["id"], required_challenge_ids)

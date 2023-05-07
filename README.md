@@ -4,7 +4,7 @@ Tool to convert specifically formatted markdown file to flag-data that can be up
 
 ## Setup
 
-Clone the repo 
+Clone the repo
 
     git clone git@github.com:KoTeCo-Oy/ctfd-challenge-uploader.git
 
@@ -17,7 +17,6 @@ Create file `src/.env.local` and add following two variables
     CTFD_ACCESS_TOKEN=TOKEN
     CTFD_URL=https://your.ctfd.address
 
-
 ## Challenge file format
 
 Syntax is following
@@ -28,6 +27,7 @@ Syntax is following
   * Description: Can you find your first flag?
   * Category: Category
   * Flag: CTF{H3llO_wOrlD}
+  * Requirement: [name of previous challenge]
 ```
 
 This will be parsed to following entry
@@ -37,11 +37,12 @@ This will be parsed to following entry
     "name": "Hello world challenge",
     "description": "Can you find your first flag?",
     "flag": "CTF{H3llO_wOrlD}"
-    "category": "Category"
+    "category": "Category",
+    "Requirement": ["name of previous challenge"]
 }
 ```
 
-You can have other "fields" described too, they will be ignored (for now). So if you want to write solving steps for the flag you can write it as following 
+You can have other "fields" described too, they will be ignored (for now). So if you want to write solving steps for the flag you can write it as following
 
 ```
 * Flag rewarded for opening PDF
@@ -63,10 +64,9 @@ Once you are ready to sync flags to CTFd, just run the following command.
     cd src
     python -m ctfd_challenge_uploader ../path/to/challenges.md
 
-
 ## Use as dependency
 
-If you want to use the parsing part, you can import `Challenges` 
+If you want to use the parsing part, you can import `Challenges`
 
     from ctfd_challenge_uploader.challenges import Challenges
 
