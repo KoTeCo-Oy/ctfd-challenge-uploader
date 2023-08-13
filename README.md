@@ -75,6 +75,8 @@ If you want to use the parsing part, you can import `Challenges`
 
 ## TODO
 
+- [ ] Add https://python-poetry.org/ for deps and packaging
+- [ ] Add tests
 - [ ] Publish package in PyPi.org
 - [ ] Some specs would be nice
 - [ ] Publish as package to avoid git cloning
