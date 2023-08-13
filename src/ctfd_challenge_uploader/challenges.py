@@ -22,6 +22,7 @@ class Challenges:
         self.__parse_file()
         self.__remove_missing_challenges()
         self.__create_new_challenges()
+        self.__reload_existing_challanges()
         self.__set_requirements()
 
     def __load_ctfd_config(self):
@@ -74,8 +75,8 @@ class Challenges:
                     challenge["name"]))
                 self.ctfd_client.delete_challenge(challenge["id"])
 
-    def __existing_challenges(self):
-        if not self.__existing_challenges_arr:
+    def __existing_challenges(self, reload=False):
+        if not self.__existing_challenges_arr or reload:
             self.__existing_challenges_arr = self.ctfd_client.get_challenges().json()[
                 "data"]
 
@@ -102,7 +103,10 @@ class Challenges:
             else:
                 print("Creating challenge '{}'".format(challenge["name"]))
                 created_challenge_response = self.ctfd_client.create_challenge(
-                    **challenge)
+                    name=challenge["name"],
+                    category=challenge.get("category") or None,
+                    description=challenge.get("description") or None
+                )
 
                 if created_challenge_response.status_code == 200:
                     challenge_data = created_challenge_response.json()["data"]
@@ -126,3 +130,6 @@ class Challenges:
                     rc_name)["id"] for rc_name in challenge["requirements"]]
                 self.ctfd_client.set_prerequisites(
                     existing_challenge["id"], required_challenge_ids)
+                
+    def __reload_existing_challanges(self):
+        self.__existing_challenges(True)
