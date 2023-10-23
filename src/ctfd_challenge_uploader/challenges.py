@@ -27,7 +27,7 @@ class Challenges:
 
     def get_challenges(self):
         self.__parse_file()
-        erturn self.challenges
+        return self.challenges
 
     def __load_ctfd_config(self):
         load_dotenv()
