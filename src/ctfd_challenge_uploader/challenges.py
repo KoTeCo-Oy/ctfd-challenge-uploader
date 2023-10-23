@@ -25,6 +25,10 @@ class Challenges:
         self.__reload_existing_challanges()
         self.__set_requirements()
 
+    def get_challenges(self):
+        self.__parse_file()
+        erturn self.challenges
+
     def __load_ctfd_config(self):
         load_dotenv()
         load_dotenv(".env.local")
