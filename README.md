@@ -10,7 +10,7 @@ Clone the repo
 
 Install packages
 
-    python -m pip install -r ../requirements.txt 
+    python -m pip install -r ../requirements.txt
 
 Create file `src/.env.local` and add following two variables
 
@@ -78,6 +78,4 @@ If you want to use the parsing part, you can import `Challenges`
 - [ ] Add https://python-poetry.org/ for deps and packaging
 - [ ] Add tests
 - [ ] Publish package in PyPi.org
-- [ ] Some specs would be nice
-- [ ] Publish as package to avoid git cloning
 - [ ] Set points win the md (now uses 1 as default)
